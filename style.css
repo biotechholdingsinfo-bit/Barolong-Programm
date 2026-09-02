@@ -15,6 +15,28 @@ body {
     line-height: 1.6;
 }
 
+/* Skip link for keyboard users */
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    width: auto;
+    height: auto;
+    background: var(--white);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    z-index: 9999;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
 header {
     background-color: var(--primary-color);
     color: var(--white);
@@ -63,11 +85,9 @@ li {
     margin-bottom: 0.5rem;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
+/* Responsive table wrapper */
+.table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { min-width: 700px; width: 100%; border-collapse: collapse; margin-top: 1rem; }
 
 th, td {
     padding: 12px;
@@ -82,4 +102,26 @@ th {
 
 tr:nth-child(even) {
     background-color: #f8fafc;
+}
+
+/* Focus outlines for keyboard users */
+a:focus, button:focus, th:focus, td:focus {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+/* Responsive layout: two columns on wide screens */
+@media (min-width: 900px) {
+    .container { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    footer { grid-column: 1 / -1; }
+}
+
+@media (max-width: 899px) {
+    header h1 { font-size: 1.5rem; }
+}
+
+/* Print-friendly adjustments */
+@media print {
+    header, .skip-link, .card { box-shadow: none; }
+    body { background: #fff; color: #000; }
 }
